@@ -1,0 +1,13 @@
+Build/test status is reported in the assistant response. Do not claim tests passed unless compilation and execution were actually run.
+{
+  "javac_found": true,
+  "java_found": true,
+  "compiled": true,
+  "smoke_test": true,
+  "details": "Java compile and scripted menu smoke test attempted in this environment.",
+  "compile_stdout": "",
+  "compile_stderr": "",
+  "run_returncode": 0,
+  "run_stdout": "==================================\n     MESSAGE ORDERING SIMULATOR\n==================================\nLogical processes available: P1, P2, P3\nNote: these are simulated processes, not separate OS processes.\n\\nFIFO rule: ON\n1. Send a message\n2. Show pending messages\n3. Deliver a message\n4. View event log\n5. Run sample scenario\n6. Compare ordering rules\n7. Toggle FIFO rule\n8. Reset simulation\n0. Exit\nChoose an option: \\nSample scenario created three messages.\nFIFO demonstration: deliver M2 before M1 and observe the rejection.\nExpected FIFO check: FIFO violation: deliver M1 before M2 on channel P1 -> P2.\nNow delivering in a valid FIFO order: M1, M3, M2 is still rejected if M2 overtakes M1; use M1, M2, M3.\n\\nEVENT LOG\nEvent Process  Type      Message  Clock    Details\n1     P1       SEND      M1       1        P1 -> P2 | First from P1\n2     P1       SEND      M2       2        P1 -> P2 | Second from P1\n3     P3       SEND      M3       1        P3 -> P2 | Independent message from P3\n4     P2       RECEIVE   M1       2        P1 -> P2 | payload=\"First from P1\" [delivery #1]\n5     P2       RECEIVE   M2       3        P1 -> P2 | payload=\"Second from P1\" [delivery #2]\n6     P2       RECEIVE   M3       4        P3 -> P2 | payload=\"Independent message from P3\" [delivery #3]\n\\nFIFO rule: ON\n1. Send a message\n2. Show pending messages\n3. Deliver a message\n4. View event log\n5. Run sample scenario\n6. Compare ordering rules\n7. Toggle FIFO rule\n8. Reset simulation\n0. Exit\nChoose an option: Goodbye.\n",
+  "run_stderr": ""
+}

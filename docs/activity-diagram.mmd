@@ -1,0 +1,26 @@
+flowchart TD
+    A([Start]) --> B[Show menu]
+    B --> C{User choice}
+    C -->|Send| D[Validate sender, receiver, payload]
+    D --> E[Increment sender clock]
+    E --> F[Create message and log SEND]
+    C -->|Deliver| G[Find pending message]
+    G --> H{FIFO enabled?}
+    H -->|Yes| I[Check earlier message on same channel]
+    I --> J{Would violate FIFO?}
+    J -->|Yes| K[Show error]
+    J -->|No| L[Update receiver Lamport clock]
+    H -->|No| L
+    L --> M[Log RECEIVE and delivery sequence]
+    C -->|View log| N[Print chronological event log]
+    C -->|Sample| O[Run reproducible scenario]
+    C -->|Reset| P[Clear clocks, messages, log]
+    K --> B
+    F --> B
+    M --> B
+    N --> B
+    O --> B
+    P --> B
+    C -->|Exit| Q([End])
+    C -->|Other| R[Show invalid option]
+    R --> B

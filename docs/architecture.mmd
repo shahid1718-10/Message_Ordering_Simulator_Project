@@ -1,0 +1,15 @@
+flowchart LR
+    U[User / Console Menu] --> S[MessageOrderingSimulator]
+    S --> P1[SimProcess P1]
+    S --> P2[SimProcess P2]
+    S --> P3[SimProcess P3]
+    S --> Q[Pending Message List]
+    S --> L[Event Log]
+    P1 -->|send event| Q
+    P2 -->|send event| Q
+    P3 -->|send event| Q
+    Q -->|manual delivery + FIFO check| S
+    S -->|receive event / Lamport update| P1
+    S -->|receive event / Lamport update| P2
+    S -->|receive event / Lamport update| P3
+    S --> L

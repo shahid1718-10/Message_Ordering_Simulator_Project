@@ -1,0 +1,48 @@
+classDiagram
+    class Main {
+      -Scanner INPUT
+      +main(String[] args)
+      -sendMessage(simulator)
+      -deliverMessage(simulator, fifoEnabled)
+    }
+    class MessageOrderingSimulator {
+      -Map~String, SimProcess~ processes
+      -List~Message~ pending
+      -List~EventRecord~ eventLog
+      +send(sender, receiver, payload) Message
+      +deliver(messageId, fifoEnabled)
+      +runSampleScenario()
+      +printPending()
+      +printEventLog()
+      +reset()
+    }
+    class SimProcess {
+      -String id
+      -int logicalClock
+      -Queue~Message~ inbox
+      +tick() int
+      +receiveTick(timestamp) int
+      +reset()
+    }
+    class Message {
+      -String id
+      -String sender
+      -String receiver
+      -String payload
+      -int sendClock
+      -long sendSequence
+    }
+    class EventRecord {
+      -int eventNumber
+      -String processId
+      -String eventType
+      -String messageId
+      -String details
+      -int logicalClock
+      -int deliverySequence
+    }
+    Main --> MessageOrderingSimulator
+    MessageOrderingSimulator o-- SimProcess
+    MessageOrderingSimulator o-- Message
+    MessageOrderingSimulator o-- EventRecord
+    SimProcess ..> Message

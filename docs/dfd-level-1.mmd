@@ -1,0 +1,13 @@
+flowchart TD
+    U[User input] --> V[1. Validate input]
+    V -->|valid send| S[2. Create message and update sender clock]
+    S --> Q[(Pending messages)]
+    S --> L[(Event log)]
+    V -->|valid delivery| D[3. Select pending message]
+    D --> F[4. Apply FIFO check if enabled]
+    F -->|allowed| C[5. Update receiver Lamport clock]
+    C --> L
+    F -->|blocked| E[Display FIFO error]
+    Q --> D
+    L --> O[6. Display event log]
+    O --> U

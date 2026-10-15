@@ -1,0 +1,19 @@
+sequenceDiagram
+    actor User
+    participant Main
+    participant Sim as MessageOrderingSimulator
+    participant P1 as SimProcess P1
+    participant P2 as SimProcess P2
+    User->>Main: Send P1 -> P2 "Hello"
+    Main->>Sim: send(P1, P2, "Hello")
+    Sim->>P1: tick()
+    P1-->>Sim: logical timestamp 1
+    Sim->>Sim: create M1 and log SEND
+    Sim-->>Main: Message M1
+    User->>Main: Deliver M1
+    Main->>Sim: deliver(M1, FIFO on)
+    Sim->>Sim: FIFO channel check
+    Sim->>P2: receiveTick(1)
+    P2-->>Sim: logical timestamp 2
+    Sim->>Sim: log RECEIVE, delivery #1
+    Sim-->>Main: delivered

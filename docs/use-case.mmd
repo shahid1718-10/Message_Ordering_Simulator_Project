@@ -1,0 +1,20 @@
+flowchart LR
+    User([User])
+    subgraph App[Message Ordering Simulator]
+      UC1((Send message))
+      UC2((View pending messages))
+      UC3((Deliver message))
+      UC4((View event log))
+      UC5((Run sample scenario))
+      UC6((Compare ordering rules))
+      UC7((Toggle FIFO))
+      UC8((Reset simulation))
+    end
+    User --- UC1
+    User --- UC2
+    User --- UC3
+    User --- UC4
+    User --- UC5
+    User --- UC6
+    User --- UC7
+    User --- UC8
